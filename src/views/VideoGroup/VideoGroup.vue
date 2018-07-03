@@ -13,18 +13,15 @@ export default {
     },
     mounted() {
         console.log(this.videos)
+    },
+    methods: {
+
     }
 }
 </script>
 <style lang="stylus" scoped>
     .video-container 
-        margin -40rpx 0
-        // width 100%
-        // box-sizing border-box
-        // display flex
-        // flex-direction row
-        // flex-wrap wrap
-        // vertical-align middle
-        // justify-content space-between
+        margin -20rpx 0
+
 </style>
 

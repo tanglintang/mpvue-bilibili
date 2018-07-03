@@ -1,7 +1,9 @@
 import request from '@/utils/request'
 
-export function catchRes(param) {
-    return request.get(`/${param}`).then((res) => {
+export function catchRes(url) {
+
+    return request.get(`/${url}`).then((res) => {
+        console.log('catchRes')
         wx.hideLoading()
         return res.data
     })

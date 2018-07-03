@@ -11,7 +11,8 @@ fly.interceptors.request.use((config) => {
     return config
 })
 //配置请求基地址
-Vue.prototype.$http = fly
+// Vue.prototype.$http = fly
 fly.config.baseURL = "https://www.easy-mock.com/mock/5b36ef7e1c549150fe149645"
+// fly.config.timeout = 5000
 
 export default fly

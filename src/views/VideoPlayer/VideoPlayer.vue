@@ -1,11 +1,170 @@
 <template>
-    <div class="video-player" style="width: 100%">
-        <!-- <video src="http://pa5a5whqq.bkt.clouddn.com/%E3%80%8C%E7%A7%91%E6%8A%80%E7%BE%8E%E5%AD%A6%E3%80%8D%E5%B0%8F%E7%B1%B38%E4%B8%80%E5%8A%A06%E5%9D%9A%E6%9E%9CR1%E9%AD%85%E6%97%8F15Plus%20%20%E5%AF%B9%E6%AF%94%E6%B5%8B%E8%AF%84%EF%BC%88%E4%B8%8A%EF%BC%892018%E5%9B%BD%E4%BA%A7%E4%B8%BB%E5%8A%9B%E6%9C%BA%E5%9E%8B%28Av25712568%29.Mp4"></video>
-        <video src="http://pa5a5whqq.bkt.clouddn.com/%E3%80%90%E4%B8%AD%E6%96%87%E5%85%AB%E7%BA%A7%E3%80%91%E4%BB%96%E4%BB%8E%E5%B0%8F%E7%9C%8B%E5%93%88%E5%88%A9%E6%B3%A2%E7%89%B9%E7%BB%83%E8%8B%B1%E8%AF%AD%EF%BC%8C%E5%8F%A3%E8%AF%AD%E7%AB%9F%E5%8F%98%E5%BE%97...%20%28Av25698033,P1%29.Mp4"></video> -->
+    <div class="video-player" >
+        <video class="video" :src="videoUrl" ref="myVideo" id="myVideo" :danmu-list="danmuList" enable-danmu danmu-btn>
+            <cover-view class="controls">
+                <cover-view class="play" @click="play" v-if="showPlayBtn">
+                </cover-view>
+                <cover-view class="pause" @click="pause">
+                </cover-view>
+            </cover-view>
+            <transition-group tag="ul" name="slide" class="danmu-container">
+                <li v-for="(item, index) in danmuList" :key="index" class="danmu-item" v-if="playing">
+                {{item.text}}
+                </li>
+            </transition-group>
+        </video>
+        <div class="damnu-input">
+            <input type="text" placeholder="发射弹幕" :class="{'is-input': input}" class="inputDanmu" @focus="getFocus" @blur="loseFocus" ref="danmuInput" @confirm="emitDanmu($event)" v-model="value" />
+        </div>
     </div>
 </template>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
+
 <script>
 export default {
-    name: 'VideoPlayer'
+    name: 'VideoPlayer',
+    props: {
+    },
+    data() {
+        return {
+            videoUrl: '',
+            input: false,
+            value: '',
+            startPlay: '',
+            playing: false,
+            showPlayBtn: true,
+
+            // 弹幕
+            totalTime: 0,
+            defaultConfig: {
+                startTime: 0,
+                top: 0,
+                size: 26,
+                color: '#fff',
+                text: '测试弹幕',
+                speed: '10s',
+            },
+            danmuList: [],
+
+            videoCtx: undefined,
+        }
+    },
+    methods: {
+        emitDanmu(e) {
+            const input = e.target.value
+            this.videoCtx.sendDanmu({
+                text: input,
+                color: '#d1d1d1',
+            })
+            console.log(input)
+        },
+        getFocus() {
+            this.input = true
+        },
+        loseFocus() {
+            this.input = false
+            this.value = ''
+        },
+        // formatTime(time) {
+        //     const temp = time.split(':').reverse()
+        //     let seconds = temp[0] ? temp[0] : 0
+        //     let minutes = temp[1] ? temp[1]*60 : 0
+        //     let hours = temp[2] ? temp[2]*60*60 : 0
+        //     const total = Number(seconds) + Number(minutes) + Number(hours)
+        //     return total
+        // },
+
+        play() {
+            this.videoCtx.play()
+            this.playing = true
+            this.showPlayBtn = false
+            // console.log('play')
+        },
+        pause() {
+            this.playing = !this.playing
+            this.playing ? this.videoCtx.play() : this.videoCtx.pause()
+            // console.log(this.playing)
+        }
+    },
+
+    mounted() {
+        const video = wx.getStorageSync("videoInfo")
+        // this.videoUrl = video.videoUrl
+        this.danmuList.push(this.defaultConfig)
+        // this.totalTime = this.formatTime(video.duration)
+        this.videoCtx = wx.createVideoContext('myVideo')
+    },
+
 }
 </script>
+<style lang="stylus" scoped>
+    .video-player
+        width 100vw
+        height auto
+        display flex
+        flex-direction column
+        justify-content flex-start
+        vertical-align middle
+        align-items center
+        .video
+            width 100vw
+
+            .play,.pause
+                display inline-block
+                position absolute
+
+            .play
+                height 60rpx
+                width 60rpx
+                left 50%
+                top 50%
+                transform translate(-50%, -50%)
+            .pause
+                height 40rpx
+                width 40rpx
+                left 30rpx
+                bottom 30rpx
+        
+        .damnu-input
+            background-color #333333
+            width 100vw
+            box-sizing border-box
+            display flex
+            flex-direction row
+            justify-content space-around
+
+            input 
+                appearance none
+                outline none
+                border none
+            .inputDanmu
+                height 60rpx
+                width 80%
+                background-color #5B5B5B
+                border-radius 40rpx
+                margin 10rpx auto
+                font-size 26rpx
+                padding 0 20rpx
+            .emitDanmu
+                width 20%
+                height 60rpx
+            
+            .is-input
+                background-color #fff
+                cursor text
+
+        .danmu-container
+            position absolute
+            width 100vw
+            height 100%
+            // background-color #000
+            // opacity 0.8
+            z-index 9
+            .danmu-item
+                position absolute
+                right 0
+                top 50rpx
+                color #fff
+                transform translateX(100%)
+
+</style>

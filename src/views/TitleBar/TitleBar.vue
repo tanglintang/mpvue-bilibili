@@ -95,29 +95,36 @@ export default {
                 background url('https://static.hdslb.com/images/akari.jpg')
                 background-repeat no-repeat
                 background-size contain
-                width 50rpx
-                height 50rpx
+                width 48rpx
+                height 48rpx
                 border-radius 50%
+                margin-right 20rpx
 
         .footer.iconList
             display flex
             flex-direction row
             justify-content space-around
             flex-wrap nowrap
+            vertical-align middle
+            align-items center
 
             .icon
                 width 46rpx
                 height 46rpx
                 display inline-block
-                margin-right 40rpx
+                margin 0 26rpx
+                background-repeat no-repeat
             .icon-game
                 background url('../../../static/images/game.png')
+                background-repeat no-repeat
                 background-size contain
             .icon-download
                 background url('../../../static/images/download.png')
+                background-repeat no-repeat
                 background-size contain
             .icon-msg
                 background url('../../../static/images/msg.png')
+                background-repeat no-repeat
                 background-size contain
 </style>
 

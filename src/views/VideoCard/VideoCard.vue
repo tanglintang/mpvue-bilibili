@@ -1,6 +1,6 @@
 <template>
     <div class="video-card">
-        <div class="card" v-for="(item, index) in videos" :key="index">
+        <div class="card" v-for="(item, index) in videos" :key="index" @click="intoVideo(item)">
             <div class="card-hd">
                 <div class="cover-img">
                     <image class="cover" :src="item.cover" />
@@ -25,8 +25,8 @@
     </div>
 </template>
 <script>
-import PlayNum from '@/views/PlayNum/PlayNum'
-import DanmuNum from '@/views/DanmuNum/DanmuNum'
+import PlayNum from '@/components/PlayNum/PlayNum'
+import DanmuNum from '@/components/DanmuNum/DanmuNum'
 
 export default {
     name: 'VideoCard',
@@ -40,7 +40,15 @@ export default {
         }
     },
     mounted() {
-        console.log(this.videos)
+
+    },
+    methods: {
+        intoVideo(item) {
+            wx.setStorageSync("videoInfo", item)
+            wx.navigateTo({
+                url: `../../pages/video/main?uid=${item.uid}`
+            })
+        }
     }
 }
 </script>

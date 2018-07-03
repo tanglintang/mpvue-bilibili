@@ -25,17 +25,16 @@
             </swiper-item>
           </div>
       </swiper>
-      <video-group :videos="videos">
-        <!-- <video-card :videos="videos" /> -->
-      </video-group>
+      <!-- <video-group :videos="videos">
+      </video-group> -->
+      <div class="video-group">
+        <video-card @requestData="requestData" :videos="videos" />
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-// import request from '@/utils/request'
-import {catchVideos} from '@/api/video.js'
-import {catchTabList} from '@/api/tabList.js'
 import {catchRes} from '@/api/catchRes.js'
 
 import TitleBar from '@/views/TitleBar/TitleBar'
@@ -64,7 +63,7 @@ export default {
     VideoCard
   },
   methods: {
-
+    
   },
   onShow() {
     catchRes('tabList').then((res) => {
@@ -78,10 +77,8 @@ export default {
     catchRes('swiperImg').then((res) => {
       Object.assign(this.imgUrls, res.swiperImg)
     })
+    this.$mount()
   },
-  mounted() {
-    // console.log(this.videos)
-  }
 }
 </script>
 
@@ -136,6 +133,7 @@ export default {
     padding 0 20rpx
     .swiper-box
       width 100%
+      height 260rpx
       .swiper-s
         border-radius 12rpx
 
@@ -149,6 +147,7 @@ export default {
       .swiper-item
         margin-bottom 0
         padding-bottom 0
+
 
 </style>
 
