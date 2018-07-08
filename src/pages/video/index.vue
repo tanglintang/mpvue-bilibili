@@ -1,11 +1,12 @@
 <template>
   <div class="video-container">
-      <video-player />
+      <video-player :videoUrl="videoUrl" />
       <div class="body">
         <div class="tabList">
-          <tab-list :tabList="tabList"></tab-list>
+          <tab-list :tabList="tabList" @changeTab="changeTab"></tab-list>
         </div>
-        <introduce :upInfo="upInfo" />
+        <introduce :upInfo="upInfo" v-if="tabId==1" />
+        <t-comment :total="total" :comments="comments" v-if="tabId==2" @handleZan="handleZan" @handleCai="handleCai"></t-comment>
       </div>
   </div>
 </template>
@@ -14,9 +15,9 @@
 import VideoPlayer from '@/views/VideoPlayer/VideoPlayer'
 import Introduce from '@/components/Introduce/Introduce'
 import TabList from '@/components/TabList/TabList'
+import TComment from '@/components/comment/comment'
 
-import {catchRes} from '@/api/catchRes.js'
-import request from '@/utils/request'
+import { getUpInfo, getComments } from '@/api/getData'
 
 export default {
   data() {
@@ -34,31 +35,58 @@ export default {
       ],
       uid: undefined,
       upInfo: {},
-      upList: []
+      upList: [],
+      tabId: 1,
+      aid: undefined,
+      comments: [],
+      total: 0,
     }
   },
-  components: {VideoPlayer, Introduce, TabList, },
+  components: {VideoPlayer, Introduce, TabList, TComment},
 
   methods: {
-
+    changeTab(id) {
+      this.tabId = id
+    },
+    handleZan(target, index, zan) {
+      target.like = zan
+      if (zan) {
+        target.zan++
+      } else {
+        target.zan--
+      }
+      this.comments[index] = target
+    },
+    handleCai(target, index, cai) {
+      target.dislike = cai
+      if (cai) {
+        target.cai++
+      } else {
+        target.cai--
+      }
+      this.comments[index] = target
+    }
   },
   onLoad(options) {
     this.uid = options.uid
+    this.aid = options.aid
   },
-  onShow() {
-    request.get('/upInfo').then((res) => {
-      console.log(res)
-        // res.upInfo.forEach((item, index) => {
-        //   if (item.uid == this.uid) {
-        //     Object.assign(this.upInfo, item)
-        //   }
-        // })
+  async mounted() {
+    this.changeTab(1)
+    this.tabList.forEach(item => {
+      item.active = false
     })
-    
+    this.tabList[0].active = true
+    this.upInfo = await getUpInfo(this.uid)
+
+    const video = wx.getStorageSync("videoInfo")
+    this.videoUrl = video.videoUrl
+
+    this.comments = await getComments(this.aid)
+
+    this.total = this.comments.length
   },
-  mounted() {
-    // console.log(this.upInfo)
-  }
+
 }
 </script>
 

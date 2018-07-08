@@ -16,6 +16,9 @@
 
 export default {
     name: 'UpInfo',
+    props: {
+        upInfo: {},
+    },
     data() {
         return {
             upInfo: {},
@@ -26,7 +29,6 @@ export default {
         }
     },
     beforeUpdate() {
-        this.upInfo = wx.getStorageSync("upInfo")
         this.upName = this.upInfo.uname
         this.avatar = this.upInfo.avatar
         this.fans = this.upInfo.fans

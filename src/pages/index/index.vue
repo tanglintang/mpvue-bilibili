@@ -3,7 +3,7 @@
     <div class="main-header">
       <title-bar></title-bar>
       <div class="" :class="{'fixed': fixed}">
-        <tab-list :tabList="tabList"></tab-list>
+        <tab-list :tabList="tabList" @changeTab="changeTab"></tab-list>
         <div class="title">
         <div class="left condition">{{condition}}</div>
         <div class="right">
@@ -18,67 +18,88 @@
       </div>
     </div>
     <div class="container">
-      <swiper class="swiper-box" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :circular="circular" >
+      <swiper class="swiper-box" :indicator-dots="indicatorDots" :autoplay="autoplay" :interval="interval" :circular="circular" v-if="tabId=='2'">
           <div class="swiper-s" v-for="(img, index) in imgUrls" :key="index">
             <swiper-item class="swiper-item">
               <image :src="img" class="slide-image"/>
             </swiper-item>
           </div>
       </swiper>
-      <!-- <video-group :videos="videos">
-      </video-group> -->
       <div class="video-group">
-        <video-card @requestData="requestData" :videos="videos" />
+        <video-card :videos="videos" v-if="tabId=='2'"/>
+        <animes :animes="animes" v-if="tabId=='3'"></animes>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import {catchRes} from '@/api/catchRes.js'
+import { getVideos, getSwiperImg, getAanimes } from '@/api/getData'
 
 import TitleBar from '@/views/TitleBar/TitleBar'
 import TabList from '@/components/TabList/TabList'
 
-import VideoGroup from '@/views/VideoGroup/VideoGroup'
 import VideoCard from '@/views/VideoCard/VideoCard'
+
+import animes from '@/views/animes/animes'
 
 export default {
   data() {
     return {
       videos: [],
-      tabList: [],
       imgUrls: [],
       condition: '综合',
       indicatorDots: false,
       autoplay: true,
       interval: 1000,
       circular: true,
+      tabId: '2',
+      animes: [],
+      tabList: [
+          {
+            "id": 1,
+            "title": "直播"
+          },
+          {
+            "id": 2,
+            "title": "推荐",
+            "active": true
+          },
+          {
+            "id": 3,
+            "title": "追番"
+          },
+          {
+            "id": 4,
+            "title": "干杯！世界杯"
+          },
+          {
+            "id": 5,
+            "title": "英雄联盟"
+          }
+      ]
     }
   },
   components: {
     TitleBar,
     TabList,
-    VideoGroup,
-    VideoCard
+    VideoCard,
+    animes
   },
   methods: {
-    
+    changeTab(id) {
+      this.tabId = id
+    }
   },
-  onShow() {
-    catchRes('tabList').then((res) => {
-      this.tabList = res.tabList
-    })
 
-    catchRes('videos').then((res) => {
-      Object.assign(this.videos, res.videos)
-    })
+  async mounted() {
+    this.tabId = '1'
+    this.videos = await getVideos()
+    this.imgUrls = await getSwiperImg()
+    this.animes = await getAnimes()
+    console.log(this.animes)
+  }
 
-    catchRes('swiperImg').then((res) => {
-      Object.assign(this.imgUrls, res.swiperImg)
-    })
-    this.$mount()
-  },
 }
 </script>
 
@@ -134,6 +155,8 @@ export default {
     .swiper-box
       width 100%
       height 260rpx
+      border-radius 12rpx
+      overflow hidden
       .swiper-s
         border-radius 12rpx
 

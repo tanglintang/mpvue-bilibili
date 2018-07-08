@@ -18,16 +18,15 @@
         </div>
     </div>
 </template>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/2.0.5/velocity.min.js"></script>
 
 <script>
 export default {
     name: 'VideoPlayer',
     props: {
+        videoUrl: String,
     },
     data() {
         return {
-            videoUrl: '',
             input: false,
             value: '',
             startPlay: '',
@@ -56,7 +55,7 @@ export default {
                 text: input,
                 color: '#d1d1d1',
             })
-            console.log(input)
+            // console.log(input)
         },
         getFocus() {
             this.input = true
@@ -87,14 +86,17 @@ export default {
         }
     },
 
-    mounted() {
-        const video = wx.getStorageSync("videoInfo")
+    beforeMount() {
+        // const video = wx.getStorageSync("videoInfo")
         // this.videoUrl = video.videoUrl
+        // console.log(this.videoUrl)
         this.danmuList.push(this.defaultConfig)
         // this.totalTime = this.formatTime(video.duration)
         this.videoCtx = wx.createVideoContext('myVideo')
     },
-
+    updated() {
+        // console.log(this.videoUrl)
+    }
 }
 </script>
 <style lang="stylus" scoped>

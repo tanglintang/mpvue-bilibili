@@ -1,7 +1,10 @@
 <template>
-    <scroll-view scroll-x="true" class="tablist row">
+    <!-- <scroll-view scroll-x="true" class="tablist row">
         <div class="tab" :class="{'active': item.active}"  v-for="(item, index) in tabList" :key="index" @click="changeTab(index, id, item)">{{item.title}}</div>
-    </scroll-view>
+    </scroll-view> -->
+    <div class="tablist row">
+        <div class="tab" :class="{'active': item.active}"  v-for="(item, index) in tabList" :key="index" @click="changeTab(index, item.id, item)">{{item.title}}</div>
+    </div>
 </template>
 
 <script>
@@ -15,6 +18,7 @@ export default {
         }
     },
     mounted() {
+        
     },
     methods: {
         changeTab(index, id, item) {
@@ -24,6 +28,7 @@ export default {
                 })
                 this.$set(item, 'active', true)
             })
+            this.$emit('changeTab', id)
         }
     }
 
@@ -31,18 +36,20 @@ export default {
 </script>
 <style lang="stylus" scoped>
     .tablist.row
-        overflow-x scroll
-        overflow-y hidden 
         width 100vw
+        box-sizing border-box
         white-space nowrap
-        padding: 20rpx 20rpx 0
+        padding: 30rpx 0 0
         background-color #fff
-        &::-webkit-scrollbar 
-            display none
+        display flex
+        flex-direction row
+        justify-content space-around
+        box-shadow 0 2rpx 4rpx 4rpx #FAFAFA
+
         .tab
+            text-align center
             display inline-block
             font-size 28rpx
-            margin-right 60rpx
             white-space nowrap
             letter-spacing 2rpx
             height 60rpx
@@ -51,5 +58,4 @@ export default {
         .active
             color #F97497
             border-bottom 4rpx solid #F97497
-        
 </style>

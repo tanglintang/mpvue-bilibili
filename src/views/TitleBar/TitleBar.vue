@@ -5,16 +5,16 @@
             <div class="avatar-btn"></div>
         </div>
         <div class="titleBar center">
-            <div class="title" v:if="title">{{title}}</div>
-            <div class="searchBox" v:if="!title">
+            <div class="title" v-if="title">{{title}}</div>
+            <div class="searchBox" v-if="!title">
                 <i class="icon-search"></i>
                 <input type="text" class="search" disabled />
             </div>
         </div>
         <div class="titleBar footer iconList">
-            <div class="icon icon-game"></div>
+            <div class="icon icon-game" v-if="!title"></div>
             <div class="icon icon-download"></div>
-            <div class="icon icon-msg"></div>
+            <div class="icon icon-msg" v-if="!title"></div>
         </div>
     </div>
 </template>
@@ -27,7 +27,15 @@ export default {
         title: String,
 
     },
+    data() {
+        return {
+            show: false
+        }
+    },
     components: {
+    },
+    mounted() {
+        // console.log(this.title)
     }
 }
 </script>
@@ -126,5 +134,6 @@ export default {
                 background url('../../../static/images/msg.png')
                 background-repeat no-repeat
                 background-size contain
+ 
 </style>
 

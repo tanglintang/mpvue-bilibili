@@ -46,7 +46,7 @@ export default {
         intoVideo(item) {
             wx.setStorageSync("videoInfo", item)
             wx.navigateTo({
-                url: `../../pages/video/main?uid=${item.uid}`
+                url: `../../pages/video/main?uid=${item.uid}&aid=${item.aid}`
             })
         }
     }

@@ -21,7 +21,7 @@ export default {
         }
     },
     mounted() {
-        console.log(this.playNum)
+        // console.log(this.playNum)
     }
 }
 </script>
