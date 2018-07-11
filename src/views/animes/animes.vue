@@ -1,7 +1,7 @@
 <template>
     <div>
-       <anime-block :animes="showAnimes" :blockName="myAnime"></anime-block>
-       <anime-block :animes="animes" :blockName="advice"></anime-block>
+       <anime-block :animes="showAnimes" :blockName="myAnime" @intoAnime="intoAnime"></anime-block>
+       <anime-block :animes="animes" :blockName="advice" @intoAnime="intoAnime"></anime-block>
     </div>
 </template>
 
@@ -26,5 +26,10 @@ export default {
             }).slice(0, 3)
         }   
     },
+    methods: {
+        intoAnime(aid) {
+            wx.navigateTo({ url: `../../pages/anime/main?aid=${aid}` })
+        }
+    }
 }
 </script>

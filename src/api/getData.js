@@ -16,11 +16,19 @@ export const getSwiperImg = () => new Promise((resolve, reject) => {
     })
 })
 
-export const getAnimes = () => new Promise((resolve, reject) => {
+export const getAnimes = (aid = 0) => new Promise((resolve, reject) => {
     const url = '/animes'
     request.get(url).then(res => {
         wx.hideLoading()
-        resolve(res.data.animes)
+        if (aid == 0) {
+            resolve(res.data.animes)
+        } else {
+            res.data.animes.forEach(item => {
+                if (item.aid == aid) {
+                    resolve(item)
+                }
+            })
+        }
     })
 })
 

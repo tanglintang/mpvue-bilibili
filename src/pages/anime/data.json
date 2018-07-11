@@ -1,0 +1,78 @@
+{
+    "animes": [{
+        "aid": "md2543",
+        "name": "狐妖小红娘",
+        "intro": "简介：根据古典小说记载，世上有人有妖，妖会与人相恋，妖寿命千年，人的寿命有限，人死了，妖活着。人会投胎转世，但投胎以后不记得上辈子的爱。妖如果痴情的话，就去找狐妖“购买”一项服务，让投胎转世的人回忆起前世的爱……狐妖红娘这个角色就为此而诞生。作品主要讲述了以红娘为职业的狐妖，在为前世恋人牵红线的过程中发生的一系列有趣、神秘的故事。",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/cbb20ee03e97a9f3ad2e1506a10fd1271f1c584a.jpg@310w_413h.webp",
+        "num": "89",
+        "status": "更新",
+        "score": 9.5,
+        "play": "3.4亿",
+        "contents": ""
+      },
+      {
+        "aid": "md6402",
+        "name": "一人之下 第二季",
+        "intro": "简介：这个世界是存在异人的。 张楚岚就是一个隐藏在普通人中的异人。在生命的前19年中，他一直小心隐藏着自己和别人的不同。直到有一天，神秘少女冯宝宝找上了他。从此他被活尸追，被怪人砍，被卷入了前所未见的麻烦之中……",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/f4e355ac82b4508e26f1883e92320879151453a7.jpg@310w_413h.webp",
+        "num": "24",
+        "status": "完结",
+        "score": 9.2,
+        "play": "9447.9万",
+        "contents": ["风起云涌，罗天大醮！", "龙虎山", "不摇碧莲", "三十二人", "炁体源流", "饵", "三十六贼", "神莹内敛", "奇门显像", "风后奇门", "清静经"]
+      },
+      {
+        "aid": "md6572",
+        "name": "少年锦衣卫 第二季",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/0adc53cb6f26afe22c6f644bf47cfab8d32bbd22.jpg@310w_413h.webp",
+        "num": "14",
+        "status": "完结",
+        "intro": "简介：被撤职的锦衣卫袁小棠与青梅竹马的方雨亭为寻找父亲失踪的线索潜入鬼街、在朋友石尧山等人的帮助下，一路逛鬼街、破机关、遇各路神秘人物……乱斗与阴谋轮番上演，随着旧事的重提，一切谜团都渐渐有了答案。",
+        "score": 9.5,
+        "play": "1199.3万",
+        "contents": ["丸子", "夜市", "小鬼", "拍卖", "瞎子", "对阵", "告别", "霁雪", "亲人", "将军", "旧事"]
+      },
+      {
+        "aid": "md5852",
+        "name": "全职高手",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/958cffa5054239ae9695469708949de0caaeabe4.jpg@310w_413h.webp",
+        "num": "12",
+        "status": "完结"
+      },
+      {
+        "aid": "md5352",
+        "name": "画江湖之不良人 第二季",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/2cc5cd1644da95ca4aa5c39ef418d86461294772.jpg@310w_413h.webp",
+        "num": "40",
+        "status": "完结"
+      },
+      {
+        "aid": "md3863",
+        "name": "镇魂街 第一季",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/9f3c32186c0779c17808c6a70648563943655af8.jpg@310w_413h.webp",
+        "num": "24",
+        "status": "完结"
+      },
+      {
+        "aid": "md6018",
+        "name": "那年那兔那些事儿 第四季",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/c8458f588c49f42578f5d6bd48785b0573d85a9b.jpg@310w_413h.webp",
+        "num": "12",
+        "status": "完结"
+      },
+      {
+        "aid": "md8892",
+        "name": "紫罗兰永恒花园",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/b6e3986355efc081b7f4aaf9f576c9ce8116e193.jpg@310w_413h.webp",
+        "num": "13",
+        "status": "完结"
+      },
+      {
+        "aid": "md3449",
+        "name": "命运石之门 境界面上的迷失之链",
+        "cover": "https://i0.hdslb.com/bfs/bangumi/9e3f73d65bfc53750ea1c2f2ee3c314c0cae4f1b.jpg@310w_413h.webp",
+        "num": "1",
+        "status": "完结"
+      }
+    ]
+  }

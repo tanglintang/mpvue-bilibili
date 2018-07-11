@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { getVideos, getSwiperImg, getAanimes } from '@/api/getData'
+import { getVideos, getSwiperImg, getAnimes } from '@/api/getData'
 
 import TitleBar from '@/views/TitleBar/TitleBar'
 import TabList from '@/components/TabList/TabList'
@@ -97,7 +97,6 @@ export default {
     this.videos = await getVideos()
     this.imgUrls = await getSwiperImg()
     this.animes = await getAnimes()
-    console.log(this.animes)
   }
 
 }

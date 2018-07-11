@@ -79,7 +79,7 @@ export default {
             display flex
             flex-direction row
             vertical-align top
-            justify-content space-between
+            justify-content flex-start
             padding 30rpx
             border-bottom 2rpx solid #F4F4F4
             .left

@@ -8,7 +8,7 @@
             <div class="more">查看全部 ></div>
         </div>
         <div class="block-bd">
-            <div class="anime" v-for="item in animes" :key="item">
+            <div class="anime" v-for="item in animes" :key="item" @click="intoAnime(item.aid)">
                 <img :src="item.cover" >
                 <span class="title">{{item.name}}</span>
                 <span class="totalNum" v-if="item.status=='完结'">全{{item.num}}话</span>
@@ -27,6 +27,11 @@ export default {
     data() {
         return {
             url: '../../../static/images/'
+        }
+    },
+    methods: {
+        intoAnime(aid) {
+            this.$emit('intoAnime', aid)
         }
     }
 }

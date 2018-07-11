@@ -1,12 +1,17 @@
 <template>
   <div class="video-container">
-      <video-player :videoUrl="videoUrl" />
+      <div class="player">
+        <video-player :videoUrl="videoUrl" />
+      </div>
+      <div class="tabList">
+        <tab-list :tabList="tabList" @changeTab="changeTab"></tab-list>
+      </div>
       <div class="body">
-        <div class="tabList">
-          <tab-list :tabList="tabList" @changeTab="changeTab"></tab-list>
-        </div>
         <introduce :upInfo="upInfo" v-if="tabId==1" />
         <t-comment :total="total" :comments="comments" v-if="tabId==2" @handleZan="handleZan" @handleCai="handleCai"></t-comment>
+      </div>
+      <div class="comment_input" v-if="tabId==2">
+          <comment-input @sendComment="sendComment"></comment-input>
       </div>
   </div>
 </template>
@@ -16,8 +21,10 @@ import VideoPlayer from '@/views/VideoPlayer/VideoPlayer'
 import Introduce from '@/components/Introduce/Introduce'
 import TabList from '@/components/TabList/TabList'
 import TComment from '@/components/comment/comment'
+import commentInput from '@/components/commentInput/commentInput'
 
 import { getUpInfo, getComments } from '@/api/getData'
+import util from '@/utils/index.js'
 
 export default {
   data() {
@@ -42,7 +49,7 @@ export default {
       total: 0,
     }
   },
-  components: {VideoPlayer, Introduce, TabList, TComment},
+  components: {VideoPlayer, Introduce, TabList, TComment, commentInput},
 
   methods: {
     changeTab(id) {
@@ -65,6 +72,20 @@ export default {
         target.cai--
       }
       this.comments[index] = target
+    },
+    sendComment(value) {
+      const date = util.formatTime(new Date()).split(' ')[0]
+      const temp = {
+        aid: this.aid,
+        cName: 'tang',
+        comment: value,
+        cTime: date,
+        cAvatar: 'https://i0.hdslb.com/bfs/face/4c7dd84f2d2cda4a91266e7015eab88cadd37c44.jpg@100Q.webp@128w_128h_100Q_1c.webp',
+        zan: 0,
+        cai: 0,
+        level: 6
+      }
+      this.comments = [temp, ...this.comments]
     }
   },
   onLoad(options) {
@@ -91,13 +112,23 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
-  .body
-    box-sizing border-box
+.video-container
+  height 100vh
+  width 100vw
+  box-sizing border-box
+  overflow hidden
+  .tabList
     width 100vw
+    box-shadow 0 2rpx 4rpx 4rpx #FAFAFA
+  .body
+    overflow-y auto
     height 500rpx
-    .tabList
-      width 100vw
-      box-shadow 0 2rpx 4rpx 4rpx #FAFAFA
-        
+  .comment_input
+    width 100vw
+    height 100rpx
+    position relative
+    bottom 20rpx
+    left 0
+    right 0
 </style>
 
