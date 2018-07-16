@@ -117,6 +117,7 @@ export default {
   width 100vw
   box-sizing border-box
   overflow hidden
+  position relative
   .tabList
     width 100vw
     box-shadow 0 2rpx 4rpx 4rpx #FAFAFA
@@ -125,9 +126,8 @@ export default {
     height 500rpx
   .comment_input
     width 100vw
-    height 100rpx
-    position relative
-    bottom 20rpx
+    position absolute
+    bottom 0
     left 0
     right 0
 </style>

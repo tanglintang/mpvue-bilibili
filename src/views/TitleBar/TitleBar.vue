@@ -71,10 +71,11 @@ export default {
                 border-radius 40rpx
                 display flex
                 align-items center
-                width auto
+                // width auto
             &.center input 
                 appearance none
                 outline none
+                width 50vw
             &.center .icon-search {
                 position absolute
                 display inline-block
@@ -120,7 +121,7 @@ export default {
                 width 46rpx
                 height 46rpx
                 display inline-block
-                margin 0 26rpx
+                margin 0 24rpx
                 background-repeat no-repeat
             .icon-game
                 background url('../../../static/images/game.png')

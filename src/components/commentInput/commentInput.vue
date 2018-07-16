@@ -3,7 +3,7 @@
         <!-- <div class="left face-icon">
             <img src="../../../static/images/emoji.png" alt="">
         </div> -->
-        <input class="inputComment" type="text" placeholder="说点什么吧" v-model="value">
+        <input type="text" placeholder="说点什么吧" v-model="value">
         <div class="right send" @click="sendComment">
             <img src="../../../static/images/send.png" alt="">
         </div>
@@ -45,9 +45,8 @@ export default {
         appearance none
         outline none
         border none
-    .inputComment
-        height 60rpx
         width 80%
+        height 60rpx
         background-color #F4F4F4
         border 2rpx solid #EAEAEA
         border-radius 60rpx
